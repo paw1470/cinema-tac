@@ -1,17 +1,22 @@
-package pl.paw1470.cinematac.value;
+package pl.paw1470.cinematac.DAO;
 
 public class RoomDAO {
     private Long id;
     private CinemaDAO cinema;
+    private int rows;
+    private int columns;
     private String name;
     private String info;
 
-    public RoomDAO(Long id, CinemaDAO cinema, String name, String info) {
+    public RoomDAO(Long id, CinemaDAO cinema, int rows, int columns, String name, String info) {
         this.id = id;
         this.cinema = cinema;
+        this.rows = rows;
+        this.columns = columns;
         this.name = name;
         this.info = info;
     }
+
 
     public Long getId() {
         return id;
@@ -27,5 +32,13 @@ public class RoomDAO {
 
     public String getInfo() {
         return info;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getColumns() {
+        return columns;
     }
 }

@@ -1,6 +1,6 @@
 package pl.paw1470.cinematac.entity;
 
-import pl.paw1470.cinematac.value.RoomDAO;
+import pl.paw1470.cinematac.DAO.RoomDAO;
 
 import javax.persistence.*;
 
@@ -42,6 +42,38 @@ public class Room {
             this.name = room.getName();
             this.name = room.getInfo();
         }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Cinema getCinema() {
+        return cinema;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }
 

@@ -1,7 +1,5 @@
 package pl.paw1470.cinematac.entity;
 
-import pl.paw1470.cinematac.value.CinemaDAO;
-
 import javax.persistence.*;
 
 @Entity
@@ -56,16 +54,27 @@ public class Cinema {
         return info;
     }
 
-    public void changeAddress(Address address){
-        this.address = address;
+    public Long getId() {
+        return id;
     }
 
-    public void updateCinema(CinemaDAO cinema){
-        if(this.id.equals(cinema.getId())){
-            this.name = cinema.getName();
-            this.email = cinema.getEmail();
-            this.tel = cinema.getTel();
-            this.info = cinema.getInfo();
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public void changeAddress(Address address){
+        this.address = address;
     }
 }

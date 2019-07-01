@@ -1,7 +1,5 @@
 package pl.paw1470.cinematac.entity;
 
-import pl.paw1470.cinematac.value.AddressDAO;
-
 import javax.persistence.*;
 
 @Entity
@@ -56,15 +54,7 @@ public class Address {
         return number;
     }
 
-    public AddressDAO getAddressDao(){
-        AddressDAO addressDAO = new AddressDAO(this.id,
-                                            this.country,
-                                            this.city,
-                                            this.code,
-                                            this.street,
-                                            this.number
-                                            );
-        return addressDAO;
+    public Long getId() {
+        return id;
     }
-
 }

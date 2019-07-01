@@ -1,7 +1,5 @@
 package pl.paw1470.cinematac.entity;
 
-import pl.paw1470.cinematac.value.MovieDAO;
-
 import javax.persistence.*;
 
 @Entity
@@ -32,10 +30,19 @@ public class Movie {
         return info;
     }
 
-    public void update(MovieDAO movie){
-        if (this.id.equals(movie.getId())) {
-            this.title = movie.getTitle();
-            this.info = movie.getInfo();
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

@@ -1,4 +1,4 @@
-package pl.paw1470.cinematac.value;
+package pl.paw1470.cinematac.DAO;
 
 public class CinemaDAO {
     private Long id;
