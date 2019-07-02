@@ -20,7 +20,8 @@ public class AddressRepositoryImpl implements AddressRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    protected Address getById(Long id) {
+    @Override
+    public Address getById(Long id) {
         return entityManager.find(Address.class, id);
     }
 
@@ -41,6 +42,5 @@ public class AddressRepositoryImpl implements AddressRepository {
     @Override
     public void delete(Long id) {
         entityManager.remove(getById(id));
-
     }
 }

@@ -19,7 +19,7 @@ public class Seance {
 
     @Temporal(TemporalType.TIME)
     @Column(name = "seance_date")
-    private Date seansDate;
+    private Date seanceDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "seance_movie", insertable = false, updatable = false)
@@ -31,9 +31,9 @@ public class Seance {
     @Column(name = "seance_is_tickets_available")
     private boolean isTicketsAvailable;
 
-    public Seance(Room room, Date seansDate, Movie movie, boolean isReservationAvailable, boolean isTicketsAvailable) {
+    public Seance(Room room, Date seanceDate, Movie movie, boolean isReservationAvailable, boolean isTicketsAvailable) {
         this.room = room;
-        this.seansDate = seansDate;
+        this.seanceDate = seanceDate;
         this.movie = movie;
         this.isReservationAvailable = isReservationAvailable;
         this.isTicketsAvailable = isTicketsAvailable;
@@ -43,8 +43,8 @@ public class Seance {
         return room;
     }
 
-    public Date getSeansDate() {
-        return seansDate;
+    public Date getSeanceDate() {
+        return seanceDate;
     }
 
     public Movie getMovie() {
@@ -73,5 +73,9 @@ public class Seance {
 
     public void openTicket(){
         isTicketsAvailable = true;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

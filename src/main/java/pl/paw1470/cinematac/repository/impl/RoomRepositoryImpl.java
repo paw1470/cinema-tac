@@ -29,7 +29,8 @@ public class RoomRepositoryImpl implements RoomRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    protected Room getById(Long id){
+    @Override
+    public Room getById(Long id){
         return entityManager.find(Room.class, id);
     }
 
@@ -57,7 +58,7 @@ public class RoomRepositoryImpl implements RoomRepository {
 
     @Override
     public void delete(Long id) {
-        entityManager.remove(getByIdDao(id));
+        entityManager.remove(getById(id));
     }
 
     @Override
@@ -68,7 +69,7 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public List<RoomDAO> getAllRoomByCinemaList(Long cinemaId) {
+    public List<RoomDAO> getAllRoomByCinemaList(Long cinemaId) {    //todo
         return null;
     }
 }

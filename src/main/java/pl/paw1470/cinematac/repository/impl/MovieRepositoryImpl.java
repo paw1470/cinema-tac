@@ -22,7 +22,8 @@ public class MovieRepositoryImpl implements MovieRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    protected Movie getById(Long id){
+    @Override
+    public Movie getById(Long id){
         return entityManager.find(Movie.class, id);
     }
 

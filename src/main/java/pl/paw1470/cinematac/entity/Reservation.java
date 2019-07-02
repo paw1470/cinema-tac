@@ -74,4 +74,8 @@ public class Reservation {
     public void confirm(){
         isConfirmed = true;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
