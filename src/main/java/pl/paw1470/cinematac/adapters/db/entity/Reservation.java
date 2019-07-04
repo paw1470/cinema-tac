@@ -1,8 +1,15 @@
 package pl.paw1470.cinematac.adapters.db.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "reservation")
 public class Reservation {
 
@@ -12,14 +19,14 @@ public class Reservation {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "reservation_seans", insertable = false, updatable = false)
+    @JoinColumn(name = "reservation_seance")
     private Seance seance;
 
     @Column(name = "reservation_is_confirmed")
     private boolean isConfirmed;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "reservation_ticket", insertable = false, updatable = false)
+    @JoinColumn(name = "reservation_ticket")
     private Ticket ticket;
 
     @Column(name = "reservation_email")
@@ -34,7 +41,13 @@ public class Reservation {
     @Column(name = "reservation_surname")
     private String surname;
 
-    public Reservation(Seance seance, boolean isConfirmed, Ticket ticket, String email, String tel, String name, String surname) {
+    @Column(name = "reservation_row")
+    private int row;
+
+    @Column(name = "reservation_column")
+    private int column;
+
+    public Reservation(Seance seance, boolean isConfirmed, Ticket ticket, String email, String tel, String name, String surname, int row, int column) {
         this.seance = seance;
         this.isConfirmed = isConfirmed;
         this.ticket = ticket;
@@ -42,41 +55,13 @@ public class Reservation {
         this.tel = tel;
         this.name = name;
         this.surname = surname;
+        this.row = row;
+        this.column = column;
     }
 
-    public Seance getSeance() {
-        return seance;
-    }
-
-    public boolean isConfirmed() {
-        return isConfirmed;
-    }
-
-    public Ticket getTicket() {
-        return ticket;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
 
     public void confirm(){
         isConfirmed = true;
     }
 
-    public Long getId() {
-        return id;
-    }
 }

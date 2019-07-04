@@ -3,7 +3,7 @@ package pl.paw1470.cinematac.core.ports.mapper;
 
 import pl.paw1470.cinematac.adapters.db.entity.Address;
 import pl.paw1470.cinematac.adapters.db.entity.Cinema;
-import pl.paw1470.cinematac.core.DAO.CinemaDAO;
+import pl.paw1470.cinematac.core.model.CinemaDAO;
 
 import java.util.List;
 

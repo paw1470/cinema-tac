@@ -1,10 +1,16 @@
 package pl.paw1470.cinematac.adapters.db.entity;
 
-import pl.paw1470.cinematac.core.DAO.RoomDAO;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import pl.paw1470.cinematac.core.model.RoomDAO;
 
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "room")
 public class Room {
 
@@ -13,8 +19,8 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_cinema", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "room_cinema")
     private Cinema cinema;
 
     @Column(name = "room_rows")
@@ -42,38 +48,6 @@ public class Room {
             this.name = room.getName();
             this.name = room.getInfo();
         }
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Cinema getCinema() {
-        return cinema;
-    }
-
-    public int getRows() {
-        return rows;
-    }
-
-    public int getColumns() {
-        return columns;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
     }
 }
 

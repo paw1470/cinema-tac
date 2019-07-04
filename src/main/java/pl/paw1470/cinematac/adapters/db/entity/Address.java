@@ -1,8 +1,15 @@
 package pl.paw1470.cinematac.adapters.db.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "address")
 public class Address {
 
@@ -32,29 +39,5 @@ public class Address {
         this.code = code;
         this.street = street;
         this.number = number;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public Long getId() {
-        return id;
     }
 }

@@ -1,9 +1,16 @@
 package pl.paw1470.cinematac.adapters.db.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "seance")
 public class Seance {
 
@@ -13,7 +20,7 @@ public class Seance {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "seance_room", insertable = false, updatable = false)
+    @JoinColumn(name = "seance_room")
     private Room room;
 
 
@@ -22,7 +29,7 @@ public class Seance {
     private Date seanceDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "seance_movie", insertable = false, updatable = false)
+    @JoinColumn(name = "seance_movie")
     private Movie movie;
 
     @Column(name = "seance_is_reservation_available")
@@ -37,26 +44,6 @@ public class Seance {
         this.movie = movie;
         this.isReservationAvailable = isReservationAvailable;
         this.isTicketsAvailable = isTicketsAvailable;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public Date getSeanceDate() {
-        return seanceDate;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public boolean isReservationAvailable() {
-        return isReservationAvailable;
-    }
-
-    public boolean isTicketsAvailable() {
-        return isTicketsAvailable;
     }
 
     public void closeReservation(){
@@ -75,7 +62,4 @@ public class Seance {
         isTicketsAvailable = true;
     }
 
-    public Long getId() {
-        return id;
-    }
 }

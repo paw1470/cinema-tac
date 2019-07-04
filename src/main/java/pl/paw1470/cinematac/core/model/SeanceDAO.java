@@ -1,4 +1,4 @@
-package pl.paw1470.cinematac.core.DAO;
+package pl.paw1470.cinematac.core.model;
 
 
 import java.util.Date;

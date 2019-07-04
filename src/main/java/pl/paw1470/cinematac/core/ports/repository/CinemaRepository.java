@@ -1,7 +1,7 @@
 package pl.paw1470.cinematac.core.ports.repository;
 
 import org.springframework.stereotype.Repository;
-import pl.paw1470.cinematac.core.DAO.CinemaDAO;
+import pl.paw1470.cinematac.core.model.CinemaDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Cinema;
 
 import java.util.List;
@@ -14,4 +14,6 @@ public interface CinemaRepository {
     CinemaDAO update(CinemaDAO cinemaDAO);
     void delete(Long id);
     List<CinemaDAO> getAllCinemaDaoList();
+    List<CinemaDAO> getAllCinemaByCityDaoList(String city);
+    void deleteAll();
 }

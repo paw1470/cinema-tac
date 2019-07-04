@@ -1,17 +1,23 @@
 package pl.paw1470.cinematac.adapters.maper;
 
-import pl.paw1470.cinematac.core.DAO.ReservationDAO;
+import pl.paw1470.cinematac.adapters.maper.lite.TicketMapperImplLite;
+import pl.paw1470.cinematac.core.model.ReservationDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Reservation;
 import pl.paw1470.cinematac.adapters.db.entity.Seance;
 import pl.paw1470.cinematac.adapters.db.entity.Ticket;
+import pl.paw1470.cinematac.core.model.SeanceDAO;
+import pl.paw1470.cinematac.core.model.TicketDAO;
 import pl.paw1470.cinematac.core.ports.mapper.ReservationMapper;
 import pl.paw1470.cinematac.core.ports.mapper.SeanceMapper;
+import pl.paw1470.cinematac.core.ports.mapper.TicketMapper;
 
 import java.util.List;
 
 public class ReservationMapperImpl implements ReservationMapper {
 
     private SeanceMapper seanceMapper = new SeanceMapperImpl();
+
+    private TicketMapper ticketMapper = new TicketMapperImpl();
 
     @Override
     public Reservation daoToEntity(ReservationDAO reservationDAO, Seance seance, Ticket ticket) {
@@ -21,7 +27,9 @@ public class ReservationMapperImpl implements ReservationMapper {
                 reservationDAO.getEmail(),
                 reservationDAO.getTel(),
                 reservationDAO.getName(),
-                reservationDAO.getSurname());
+                reservationDAO.getSurname(),
+                reservationDAO.getRow(),
+                reservationDAO.getColumn());
         return reservation;
     }
 
@@ -30,18 +38,24 @@ public class ReservationMapperImpl implements ReservationMapper {
         ReservationDAO reservationDAO = new ReservationDAO(reservation.getId(),
                 seanceMapper.entityToDao(reservation.getSeance()),
                 reservation.isConfirmed(),
-                reservation.getTicket().getTicketType(),
-                reservation.getTicket().getPrice(),
+                ticketMapper.entityToDao(reservation.getTicket()),
                 reservation.getEmail(),
                 reservation.getTel(),
                 reservation.getName(),
-                reservation.getSurname()
+                reservation.getSurname(),
+                reservation.getRow(),
+                reservation.getColumn()
                 );
         return reservationDAO;
     }
 
     @Override
-    public List<Reservation> listToDao(List<Reservation> reservationListn) {
+    public List<ReservationDAO> listToDao(List<Reservation> reservationList) {
+        return null;
+    }
+
+    @Override
+    public ReservationDAO fastDao(SeanceDAO seance, TicketDAO ticket, boolean isConfirmed, String info, int row, int column) {
         return null;
     }
 }

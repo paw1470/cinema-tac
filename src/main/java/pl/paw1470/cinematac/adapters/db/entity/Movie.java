@@ -1,8 +1,15 @@
 package pl.paw1470.cinematac.adapters.db.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "movie")
 public class Movie {
 
@@ -22,27 +29,4 @@ public class Movie {
         this.info = info;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

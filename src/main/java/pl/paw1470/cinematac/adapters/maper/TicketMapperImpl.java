@@ -1,6 +1,6 @@
 package pl.paw1470.cinematac.adapters.maper;
 
-import pl.paw1470.cinematac.core.DAO.TicketDAO;
+import pl.paw1470.cinematac.core.model.TicketDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Seance;
 import pl.paw1470.cinematac.adapters.db.entity.Ticket;
 import pl.paw1470.cinematac.core.ports.mapper.SeanceMapper;
@@ -28,7 +28,7 @@ public class TicketMapperImpl implements TicketMapper {
                 ticket.getTicketType(),
                 ticket.getPrice(),
                 ticket.isActive(),
-                seanceMapper.entityToDao(ticket.getTicketSeance())
+                seanceMapper.entityToDao(ticket.getSeance())
         );
         return ticketDAO;
     }

@@ -2,7 +2,8 @@ package pl.paw1470.cinematac.adapters.db.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import pl.paw1470.cinematac.core.DAO.RoomDAO;
+import pl.paw1470.cinematac.adapters.maper.lite.RoomMapperImplLite;
+import pl.paw1470.cinematac.core.model.RoomDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Cinema;
 import pl.paw1470.cinematac.adapters.db.entity.Room;
 import pl.paw1470.cinematac.core.ports.mapper.RoomMapper;
@@ -20,7 +21,7 @@ import java.util.List;
 @Transactional
 public class RoomRepositoryImpl implements RoomRepository {
 
-    private RoomMapper roomMapper = new RoomMapperImpl();
+    private RoomMapper roomMapper = new RoomMapperImplLite();
 
     @Autowired
     CinemaRepository cinemaRepository;
@@ -43,7 +44,7 @@ public class RoomRepositoryImpl implements RoomRepository {
     public RoomDAO add(RoomDAO roomDAO) {
         Cinema cinema = cinemaRepository.getById(roomDAO.getCinema().getId());
         Room room = roomMapper.daoToEntity(roomDAO, cinema);
-        entityManager.persist(cinema);
+        entityManager.persist(room);
         return roomMapper.entityToDao(room);
     }
 
@@ -62,13 +63,23 @@ public class RoomRepositoryImpl implements RoomRepository {
 
     @Override
     public List<RoomDAO> getAllRoomDaoList() {
-        Query query = entityManager.createQuery("FROM room");
+        Query query = entityManager.createQuery("FROM Room");
         List<Room> roomList = query.getResultList();
         return roomMapper.listToDao(roomList);
     }
 
     @Override
     public List<RoomDAO> getAllRoomByCinemaList(Long cinemaId) {    //todo
-        return null;
+        Query query = entityManager.createQuery("FROM Room R WHERE R.cinema.id =:cinemaId");
+        query.setParameter("cinemaId", cinemaId);
+        List<Room> roomList = query.getResultList();
+        return roomMapper.listToDao(roomList);
+    }
+
+    @Override
+    public void deleteAll() {
+        String hql = "DELETE FROM Room ";
+        Query query = entityManager.createQuery(hql);
+        int result = query.executeUpdate();
     }
 }

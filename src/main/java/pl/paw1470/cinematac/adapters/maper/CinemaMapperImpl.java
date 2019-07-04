@@ -4,7 +4,7 @@ import pl.paw1470.cinematac.adapters.db.entity.Address;
 import pl.paw1470.cinematac.adapters.db.entity.Cinema;
 import pl.paw1470.cinematac.core.ports.mapper.AddressMapper;
 import pl.paw1470.cinematac.core.ports.mapper.CinemaMapper;
-import pl.paw1470.cinematac.core.DAO.CinemaDAO;
+import pl.paw1470.cinematac.core.model.CinemaDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +46,11 @@ public class CinemaMapperImpl implements CinemaMapper {
     @Override
     public List<CinemaDAO> listToDao(List<Cinema> cinemaList) {
         List<CinemaDAO> cinemaDAOList = new ArrayList<>();
-        for (Cinema c : cinemaList) {
-            cinemaDAOList.add(entityToDao(c));
+        if(cinemaList.isEmpty()){
+        } else {
+            for (Cinema c : cinemaList) {
+                cinemaDAOList.add(entityToDao(c));
+            }
         }
         return cinemaDAOList;
     }

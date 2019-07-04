@@ -8,7 +8,7 @@ import pl.paw1470.cinematac.core.ports.mapper.CinemaMapper;
 import pl.paw1470.cinematac.adapters.maper.CinemaMapperImpl;
 import pl.paw1470.cinematac.core.ports.repository.AddressRepository;
 import pl.paw1470.cinematac.core.ports.repository.CinemaRepository;
-import pl.paw1470.cinematac.core.DAO.CinemaDAO;
+import pl.paw1470.cinematac.core.model.CinemaDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -62,8 +62,24 @@ public class CinemaRepositoryImpl implements CinemaRepository {
 
     @Override
     public List<CinemaDAO> getAllCinemaDaoList() {
-        Query query = entityManager.createQuery("FROM cinema");
+        Query query = entityManager.createQuery("FROM Cinema");
         List<Cinema> cinemaList = query.getResultList();
         return cinemaMapper.listToDao(cinemaList);
+    }
+
+    @Override
+    public List<CinemaDAO> getAllCinemaByCityDaoList(String city) {
+        Query query = entityManager.createQuery("FROM Cinema C WHERE C.address.city =:city");
+        query.setParameter("city", city);
+        List<Cinema> cinemaList = query.getResultList();
+        return cinemaMapper.listToDao(cinemaList);
+    }
+
+    @Override
+    public void deleteAll() {
+        String hql = "DELETE FROM Cinema ";
+        Query query = entityManager.createQuery(hql);
+        int result = query.executeUpdate();
+        addressRepository.deleteAll();
     }
 }

@@ -1,6 +1,6 @@
 package pl.paw1470.cinematac.core.ports.mapper;
 
-import pl.paw1470.cinematac.core.DAO.SeanceDAO;
+import pl.paw1470.cinematac.core.model.SeanceDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Movie;
 import pl.paw1470.cinematac.adapters.db.entity.Room;
 import pl.paw1470.cinematac.adapters.db.entity.Seance;

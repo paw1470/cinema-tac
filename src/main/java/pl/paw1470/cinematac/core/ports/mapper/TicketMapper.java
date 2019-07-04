@@ -1,6 +1,6 @@
 package pl.paw1470.cinematac.core.ports.mapper;
 
-import pl.paw1470.cinematac.core.DAO.TicketDAO;
+import pl.paw1470.cinematac.core.model.TicketDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Seance;
 import pl.paw1470.cinematac.adapters.db.entity.Ticket;
 

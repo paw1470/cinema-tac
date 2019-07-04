@@ -1,7 +1,7 @@
 package pl.paw1470.cinematac.core.ports.repository;
 
 import org.springframework.stereotype.Repository;
-import pl.paw1470.cinematac.core.DAO.RoomDAO;
+import pl.paw1470.cinematac.core.model.RoomDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Room;
 
 import java.util.List;
@@ -15,4 +15,5 @@ public interface RoomRepository {
     void delete(Long id);
     List<RoomDAO> getAllRoomDaoList();
     List<RoomDAO> getAllRoomByCinemaList(Long cinemaId);
+    void deleteAll();
 }

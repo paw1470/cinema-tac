@@ -1,8 +1,15 @@
 package pl.paw1470.cinematac.adapters.db.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "cinema")
 public class Cinema {
 
@@ -15,7 +22,7 @@ public class Cinema {
     private String name;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cinema_address", insertable = false, updatable = false)
+    @JoinColumn(name = "cinema_address")
     private Address address;
 
     @Column(name = "cinema_email")
@@ -33,49 +40,5 @@ public class Cinema {
         this.email = email;
         this.tel = tel;
         this.info = info;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public void changeAddress(Address address){
-        this.address = address;
     }
 }

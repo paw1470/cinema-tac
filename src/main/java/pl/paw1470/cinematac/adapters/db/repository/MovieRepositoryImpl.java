@@ -5,7 +5,7 @@ import pl.paw1470.cinematac.adapters.db.entity.Movie;
 import pl.paw1470.cinematac.core.ports.mapper.MovieMapper;
 import pl.paw1470.cinematac.adapters.maper.MovieMapperImpl;
 import pl.paw1470.cinematac.core.ports.repository.MovieRepository;
-import pl.paw1470.cinematac.core.DAO.MovieDAO;
+import pl.paw1470.cinematac.core.model.MovieDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -55,8 +55,17 @@ public class MovieRepositoryImpl implements MovieRepository {
 
     @Override
     public List<MovieDAO> getAllCinemaDaoList() {
-        Query query = entityManager.createQuery("FROM movie");
+        Query query = entityManager.createQuery("FROM Movie");
         List<Movie> movieList = query.getResultList();
         return movieMapper.listToDao((movieList));
     }
+
+    @Override
+    public void deleteAll() {
+        String hql = "DELETE FROM Movie ";
+        Query query = entityManager.createQuery(hql);
+        int result = query.executeUpdate();
+    }
+
+
 }

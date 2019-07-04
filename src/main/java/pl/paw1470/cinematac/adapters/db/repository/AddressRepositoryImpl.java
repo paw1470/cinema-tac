@@ -5,10 +5,11 @@ import pl.paw1470.cinematac.adapters.db.entity.Address;
 import pl.paw1470.cinematac.core.ports.mapper.AddressMapper;
 import pl.paw1470.cinematac.adapters.maper.AddressMapperImpl;
 import pl.paw1470.cinematac.core.ports.repository.AddressRepository;
-import pl.paw1470.cinematac.core.DAO.AddressDAO;
+import pl.paw1470.cinematac.core.model.AddressDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 @Repository
@@ -42,5 +43,12 @@ public class AddressRepositoryImpl implements AddressRepository {
     @Override
     public void delete(Long id) {
         entityManager.remove(getById(id));
+    }
+
+    @Override
+    public void deleteAll() {
+        String hql = "DELETE FROM Address ";
+        Query query = entityManager.createQuery(hql);
+        int result = query.executeUpdate();
     }
 }

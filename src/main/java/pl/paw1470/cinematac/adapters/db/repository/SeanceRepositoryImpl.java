@@ -2,11 +2,15 @@ package pl.paw1470.cinematac.adapters.db.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import pl.paw1470.cinematac.core.DAO.SeanceDAO;
+import pl.paw1470.cinematac.adapters.db.entity.Movie;
+import pl.paw1470.cinematac.adapters.db.entity.Room;
+import pl.paw1470.cinematac.core.model.SeanceDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Seance;
 import pl.paw1470.cinematac.core.ports.mapper.SeanceMapper;
 import pl.paw1470.cinematac.adapters.maper.SeanceMapperImpl;
 import pl.paw1470.cinematac.core.ports.repository.MovieRepository;
+import pl.paw1470.cinematac.core.ports.repository.ReservationRepository;
+import pl.paw1470.cinematac.core.ports.repository.RoomRepository;
 import pl.paw1470.cinematac.core.ports.repository.SeanceRepository;
 
 import javax.persistence.EntityManager;
@@ -21,9 +25,14 @@ public class SeanceRepositoryImpl implements SeanceRepository {
 
     private SeanceMapper seanceMapper = new SeanceMapperImpl();
 
+    @Autowired
+    RoomRepository roomRepository;
 
     @Autowired
     MovieRepository movieRepository;
+
+//    @Autowired
+//    ReservationRepository reservationRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -40,6 +49,15 @@ public class SeanceRepositoryImpl implements SeanceRepository {
     }
 
     @Override
+    public SeanceDAO add(SeanceDAO seanceDAO) {
+        Movie movie = movieRepository.getById(seanceDAO.getMovie().getId());
+        Room room = roomRepository.getById(seanceDAO.getRoom().getId());
+        Seance seance = seanceMapper.daoToEntity(seanceDAO, movie, room);
+        entityManager.persist(seance);
+        return seanceMapper.entityToDao(seance);
+    }
+
+    @Override
     public SeanceDAO setReservationAvailability(Long id, boolean reservationAvailability) {
         Seance seance = getById(id);
         if(reservationAvailability){    //pozwalam rezerwowac i kupowac bilety
@@ -47,7 +65,7 @@ public class SeanceRepositoryImpl implements SeanceRepository {
             seance.openTicket();
         } else {
             seance.closeReservation();
-            //todo zamykanie wszystkich rezerwacji
+            //todo zamykanie wszystkich rezerwacji (sprawdzic)
         }
         entityManager.flush();
         return getByIdDao(id);
@@ -63,7 +81,7 @@ public class SeanceRepositoryImpl implements SeanceRepository {
         } else {
             seance.closeTicket();   //zabraniam kupowac bilety i rezerwowac
             seance.closeReservation();
-            //todo zamykanie rezerwacji
+            //todo zamykanie rezerwacji (sprawdzic)
         }
         entityManager.flush();
         return getByIdDao(id);
@@ -77,18 +95,31 @@ public class SeanceRepositoryImpl implements SeanceRepository {
 
     @Override
     public List<SeanceDAO> getAllSeanceDaoList() {
-        Query query = entityManager.createQuery("FROM seance");
+        Query query = entityManager.createQuery("FROM Seance");
         List<Seance> seanceList = query.getResultList();
         return seanceMapper.listToDao(seanceList);
     }
 
     @Override
-    public List<SeanceDAO> getAllSeanceByMovieDaoList(Long movieId) {   //todo
-        return null;
+    public List<SeanceDAO> getAllSeanceByMovieDaoList(Long movieId) {
+        Query query = entityManager.createQuery("FROM Seance S WHERE S.movie.id = :movieId");
+        query.setParameter("movieId", movieId);
+        List<Seance> seanceList = query.getResultList();
+        return seanceMapper.listToDao(seanceList);
     }
 
     @Override
     public List<SeanceDAO> getAllSeanceByCinemaDaoList(Long cinemaId) {     //todo
-        return null;
+        Query query = entityManager.createQuery("FROM Seance S WHERE S.room.cinema.id =:cinemaId");
+        query.setParameter("cinemaId", cinemaId);
+        List<Seance> seanceList = query.getResultList();
+        return seanceMapper.listToDao(seanceList);
+    }
+
+    @Override
+    public void deleteAll() {
+        String hql = "DELETE FROM Seance ";
+        Query query = entityManager.createQuery(hql);
+        int result = query.executeUpdate();
     }
 }

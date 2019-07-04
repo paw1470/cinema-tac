@@ -3,7 +3,7 @@ package pl.paw1470.cinematac.adapters.db.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.paw1470.cinematac.core.DAO.TicketDAO;
+import pl.paw1470.cinematac.core.model.TicketDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Seance;
 import pl.paw1470.cinematac.adapters.db.entity.Ticket;
 import pl.paw1470.cinematac.core.ports.mapper.TicketMapper;
@@ -61,13 +61,23 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public List<TicketDAO> getAllTicketDaoList() {
-        Query query = entityManager.createQuery("FROM ticket");
+        Query query = entityManager.createQuery("FROM Ticket");
         List<Ticket> ticketList = query.getResultList();
         return ticketMapper.listToDao(ticketList);
     }
 
     @Override
-    public List<TicketDAO> getAllTIcketBySeanceDaoList(Long seanceId) {//todo
-        return null;
+    public List<TicketDAO> getAllTicketBySeanceDaoList(Long seanceId) {
+        Query query = entityManager.createQuery("FROM Ticket T WHERE T.seance.id = :seanceId");
+        query.setParameter("seanceId", seanceId);
+        List<Ticket> ticketList = query.getResultList();
+        return ticketMapper.listToDao(ticketList);
+    }
+
+    @Override
+    public void deleteAll() {
+        String hql = "DELETE FROM Ticket ";
+        Query query = entityManager.createQuery(hql);
+        int result = query.executeUpdate();
     }
 }

@@ -1,8 +1,15 @@
 package pl.paw1470.cinematac.adapters.db.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "ticket")
 public class Ticket {
 
@@ -15,8 +22,8 @@ public class Ticket {
     private String ticketType;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ticket_seance", insertable = false, updatable = false)
-    private Seance ticketSeance;
+    @JoinColumn(name = "ticket_seance")
+    private Seance seance;
 
     @Column(name = "ticket_price")
     private double price;
@@ -24,34 +31,10 @@ public class Ticket {
     @Column(name = "ticket_is_active")
     private boolean isActive;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getTicketType() {
-        return ticketType;
-    }
-
-    public Seance getTicketSeance() {
-        return ticketSeance;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public Ticket(String ticketType, Seance ticketSeance, double price, boolean isActive) {
+    public Ticket(String ticketType, Seance seance, double price, boolean isActive) {
         this.ticketType = ticketType;
-        this.ticketSeance = ticketSeance;
+        this.seance = seance;
         this.price = price;
         this.isActive = isActive;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
     }
 }
