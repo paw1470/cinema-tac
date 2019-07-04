@@ -11,7 +11,9 @@ public interface ReservationService {
     Optional<ReservationDAO> getById(Long id);
     List<ReservationDAO> getAll();
     List<ReservationDAO> getBySeance(Long id);
+    void removeById(Long id);
     boolean[][] getFreePlacesBySeance(Long id);
+    void confirmReservation(Long id);
     void removeAll();
     boolean isPlaceFree(ReservationDAO reservationDAO);
 }

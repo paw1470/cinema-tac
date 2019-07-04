@@ -38,6 +38,11 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public void removeById(Long id) {
+        reservationRepository.delete(id);
+    }
+
+    @Override
     public boolean[][] getFreePlacesBySeance(Long id) {
         List<ReservationDAO> reservationDAOList = getBySeance(id);
         int row = 20;
@@ -55,6 +60,11 @@ public class ReservationServiceImpl implements ReservationService {
             }
         }
         return freePlaces;
+    }
+
+    @Override
+    public void confirmReservation(Long id) {
+        reservationRepository.confirm(id);
     }
 
     @Override
