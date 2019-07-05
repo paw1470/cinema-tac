@@ -3,8 +3,6 @@ package pl.paw1470.cinematac.adapters.maper.lite;
 import pl.paw1470.cinematac.adapters.db.entity.Movie;
 import pl.paw1470.cinematac.adapters.db.entity.Room;
 import pl.paw1470.cinematac.adapters.db.entity.Seance;
-import pl.paw1470.cinematac.adapters.maper.MovieMapperImpl;
-import pl.paw1470.cinematac.adapters.maper.RoomMapperImpl;
 import pl.paw1470.cinematac.core.model.MovieDAO;
 import pl.paw1470.cinematac.core.model.RoomDAO;
 import pl.paw1470.cinematac.core.model.SeanceDAO;
@@ -24,7 +22,7 @@ public class SeanceMapperImplLite implements SeanceMapper {
     @Override
     public Seance daoToEntity(SeanceDAO seanceDAO, Movie movie, Room room) {
         Seance seance = new Seance(room,
-                seanceDAO.getSeansDate(),
+                seanceDAO.getSeanceDate(),
                 movie,
                 seanceDAO.isReservationAvailable(),
                 seanceDAO.isTicketsAvailable());

@@ -19,7 +19,7 @@ public class SeanceMapperImpl implements SeanceMapper {
     @Override
     public Seance daoToEntity(SeanceDAO seanceDAO, Movie movie, Room room) {
         Seance seance = new Seance(room,
-                seanceDAO.getSeansDate(),
+                seanceDAO.getSeanceDate(),
                 movie,
                 seanceDAO.isReservationAvailable(),
                 seanceDAO.isTicketsAvailable());
