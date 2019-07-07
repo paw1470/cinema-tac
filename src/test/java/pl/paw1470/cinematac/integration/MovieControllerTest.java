@@ -1,6 +1,5 @@
 package pl.paw1470.cinematac.integration;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -13,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import pl.paw1470.cinematac.adapters.maper.lite.MovieMapperImplLite;
+import pl.paw1470.cinematac.adapters.maper.MovieMapperImpl;
 import pl.paw1470.cinematac.core.model.MovieDAO;
 import pl.paw1470.cinematac.core.ports.service.MovieService;
 
@@ -31,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MovieControllerTest {
     private ObjectMapper mapper = new ObjectMapper();
 
-    private MovieMapperImplLite movieMapper = new MovieMapperImplLite();
+    private MovieMapperImpl movieMapper = new MovieMapperImpl();
 
     private MovieDAO defaultMovieDAO = movieMapper.fastDao("Terminator");
 

@@ -2,7 +2,6 @@ package pl.paw1470.cinematac.adapters.db.repository;
 
 import org.springframework.stereotype.Repository;
 import pl.paw1470.cinematac.adapters.db.entity.Address;
-import pl.paw1470.cinematac.core.ports.mapper.AddressMapper;
 import pl.paw1470.cinematac.adapters.maper.AddressMapperImpl;
 import pl.paw1470.cinematac.core.ports.repository.AddressRepository;
 import pl.paw1470.cinematac.core.model.AddressDAO;
@@ -16,7 +15,7 @@ import javax.transaction.Transactional;
 @Transactional
 public class AddressRepositoryImpl implements AddressRepository {
 
-    private AddressMapper addressMapper = new AddressMapperImpl();
+    private AddressMapperImpl addressMapper = new AddressMapperImpl();
 
     @PersistenceContext
     private EntityManager entityManager;

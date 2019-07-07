@@ -2,12 +2,11 @@ package pl.paw1470.cinematac.adapters.db.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import pl.paw1470.cinematac.adapters.maper.lite.RoomMapperImplLite;
+import pl.paw1470.cinematac.adapters.maper.RoomMapperImpl;
 import pl.paw1470.cinematac.core.model.RoomDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Cinema;
 import pl.paw1470.cinematac.adapters.db.entity.Room;
 import pl.paw1470.cinematac.core.ports.mapper.RoomMapper;
-import pl.paw1470.cinematac.adapters.maper.RoomMapperImpl;
 import pl.paw1470.cinematac.core.ports.repository.CinemaRepository;
 import pl.paw1470.cinematac.core.ports.repository.RoomRepository;
 
@@ -21,7 +20,7 @@ import java.util.List;
 @Transactional
 public class RoomRepositoryImpl implements RoomRepository {
 
-    private RoomMapper roomMapper = new RoomMapperImplLite();
+    private RoomMapper roomMapper = new RoomMapperImpl();
 
     @Autowired
     CinemaRepository cinemaRepository;

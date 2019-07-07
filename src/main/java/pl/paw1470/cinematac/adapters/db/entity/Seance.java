@@ -1,10 +1,12 @@
 package pl.paw1470.cinematac.adapters.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -24,9 +26,8 @@ public class Seance {
     private Room room;
 
 
-    @Temporal(TemporalType.TIME)
     @Column(name = "seance_date")
-    private Date seanceDate;
+    private LocalDateTime seanceDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "seance_movie")
@@ -38,7 +39,7 @@ public class Seance {
     @Column(name = "seance_is_tickets_available")
     private boolean isTicketsAvailable;
 
-    public Seance(Room room, Date seanceDate, Movie movie, boolean isReservationAvailable, boolean isTicketsAvailable) {
+    public Seance(Room room, LocalDateTime seanceDate, Movie movie, boolean isReservationAvailable, boolean isTicketsAvailable) {
         this.room = room;
         this.seanceDate = seanceDate;
         this.movie = movie;

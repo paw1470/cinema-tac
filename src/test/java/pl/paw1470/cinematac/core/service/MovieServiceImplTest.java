@@ -1,15 +1,13 @@
 package pl.paw1470.cinematac.core.service;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.paw1470.cinematac.adapters.maper.lite.MovieMapperImplLite;
+import pl.paw1470.cinematac.adapters.maper.MovieMapperImpl;
 import pl.paw1470.cinematac.core.model.MovieDAO;
-import pl.paw1470.cinematac.core.ports.mapper.MovieMapper;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +18,7 @@ public class MovieServiceImplTest {
     @Autowired
     private MovieServiceImpl movieService;
 
-    private MovieMapperImplLite movieMapper = new MovieMapperImplLite();
+    private MovieMapperImpl movieMapper = new MovieMapperImpl();
 
     private MovieDAO movieDAO = movieMapper.fastDao("Terminator");
 

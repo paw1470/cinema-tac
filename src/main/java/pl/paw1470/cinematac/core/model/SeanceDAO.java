@@ -1,20 +1,22 @@
 package pl.paw1470.cinematac.core.model;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class SeanceDAO {
     private Long id;
     private RoomDAO room;
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
-    private Date seanceDate;
+
+    @JsonSerialize(using = ToStringSerializer.class)
+    private LocalDateTime seanceDate;
     private MovieDAO movie;
     private boolean isReservationAvailable;
     private boolean isTicketsAvailable;
 
-    public SeanceDAO(Long id, RoomDAO room, Date seanceDate, MovieDAO movie, boolean isReservationAvailable, boolean isTicketsAvailable) {
+    public SeanceDAO(Long id, RoomDAO room, LocalDateTime seanceDate, MovieDAO movie, boolean isReservationAvailable, boolean isTicketsAvailable) {
         this.id = id;
         this.room = room;
         this.seanceDate = seanceDate;
@@ -31,7 +33,7 @@ public class SeanceDAO {
         return room;
     }
 
-    public Date getSeanceDate() {
+    public LocalDateTime getSeanceDate() {
         return seanceDate;
     }
 

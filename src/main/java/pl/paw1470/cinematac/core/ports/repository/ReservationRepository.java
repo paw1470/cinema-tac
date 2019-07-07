@@ -14,7 +14,7 @@ public interface ReservationRepository {
     List<ReservationDAO> getAll();
     List<ReservationDAO> getAllBySeance(Long seanceId);
     void delete(Long id);
-    int deleteNotConfirmedBySeance(Long cinemaId);
+    int deleteNotConfirmedBySeance(Long seanceId);
     void deleteAll();
     boolean isPlaceFree(ReservationDAO reservationDAO);
 }

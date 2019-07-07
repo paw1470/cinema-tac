@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pl.paw1470.cinematac.adapters.db.entity.Movie;
 import pl.paw1470.cinematac.adapters.db.entity.Room;
+import pl.paw1470.cinematac.adapters.maper.SeanceMapperImpl;
 import pl.paw1470.cinematac.core.model.SeanceDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Seance;
-import pl.paw1470.cinematac.core.ports.mapper.SeanceMapper;
-import pl.paw1470.cinematac.adapters.maper.SeanceMapperImpl;
 import pl.paw1470.cinematac.core.ports.repository.MovieRepository;
 import pl.paw1470.cinematac.core.ports.repository.ReservationRepository;
 import pl.paw1470.cinematac.core.ports.repository.RoomRepository;
@@ -23,16 +22,13 @@ import java.util.List;
 @Transactional
 public class SeanceRepositoryImpl implements SeanceRepository {
 
-    private SeanceMapper seanceMapper = new SeanceMapperImpl();
+    private SeanceMapperImpl seanceMapper = new SeanceMapperImpl();
 
     @Autowired
     RoomRepository roomRepository;
 
     @Autowired
     MovieRepository movieRepository;
-
-//    @Autowired
-//    ReservationRepository reservationRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -65,7 +61,6 @@ public class SeanceRepositoryImpl implements SeanceRepository {
             seance.openTicket();
         } else {
             seance.closeReservation();
-            //todo zamykanie wszystkich rezerwacji (sprawdzic)
         }
         entityManager.flush();
         return getByIdDao(id);
@@ -81,7 +76,6 @@ public class SeanceRepositoryImpl implements SeanceRepository {
         } else {
             seance.closeTicket();   //zabraniam kupowac bilety i rezerwowac
             seance.closeReservation();
-            //todo zamykanie rezerwacji (sprawdzic)
         }
         entityManager.flush();
         return getByIdDao(id);

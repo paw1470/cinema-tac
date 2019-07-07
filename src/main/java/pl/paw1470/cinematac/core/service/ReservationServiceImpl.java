@@ -77,4 +77,9 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.isPlaceFree(reservationDAO);
     }
 
+    @Override
+    public void removeNotConfirmed(Long id) {
+        reservationRepository.deleteNotConfirmedBySeance(id);
+    }
+
 }

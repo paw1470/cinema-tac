@@ -3,11 +3,10 @@ package pl.paw1470.cinematac.adapters.db.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import pl.paw1470.cinematac.adapters.maper.TicketMapperImpl;
 import pl.paw1470.cinematac.core.model.TicketDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Seance;
 import pl.paw1470.cinematac.adapters.db.entity.Ticket;
-import pl.paw1470.cinematac.core.ports.mapper.TicketMapper;
-import pl.paw1470.cinematac.adapters.maper.TicketMapperImpl;
 import pl.paw1470.cinematac.core.ports.repository.SeanceRepository;
 import pl.paw1470.cinematac.core.ports.repository.TicketRepository;
 
@@ -20,7 +19,7 @@ import java.util.List;
 @Transactional
 public class TicketRepositoryImpl implements TicketRepository {
 
-    private TicketMapper ticketMapper = new TicketMapperImpl();
+    private TicketMapperImpl ticketMapper = new TicketMapperImpl();
 
     @Autowired
     private SeanceRepository seanceRepository;
@@ -49,6 +48,7 @@ public class TicketRepositoryImpl implements TicketRepository {
     @Override
     public TicketDAO add(TicketDAO ticketDAO) {
         Seance seance = seanceRepository.getById(ticketDAO.getSeanceDAO().getId());
+    System.out.println("nie ma seansu");
         Ticket ticket = ticketMapper.daoToEntity(ticketDAO, seance);
         entityManager.persist(ticket);
         return ticketMapper.entityToDao(ticket);

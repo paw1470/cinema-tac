@@ -16,4 +16,5 @@ public interface ReservationService {
     void confirmReservation(Long id);
     void removeAll();
     boolean isPlaceFree(ReservationDAO reservationDAO);
+    void removeNotConfirmed(Long id);
 }

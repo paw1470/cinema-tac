@@ -9,6 +9,9 @@ public interface SeanceService {
     List<SeanceDAO> getAll();
     List<SeanceDAO> getAllByCinema(Long id);
     SeanceDAO setTicketAvailability(Long id, boolean availability);
+
+    void removeNotConfirmedReservation(Long id);
+
     SeanceDAO setReservationAvailability(Long id, boolean availability);
     void removeAll();
 

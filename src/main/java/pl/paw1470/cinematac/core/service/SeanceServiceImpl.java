@@ -1,8 +1,10 @@
 package pl.paw1470.cinematac.core.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.paw1470.cinematac.core.model.SeanceDAO;
 import pl.paw1470.cinematac.core.ports.repository.SeanceRepository;
+import pl.paw1470.cinematac.core.ports.service.ReservationService;
 import pl.paw1470.cinematac.core.ports.service.SeanceService;
 
 import java.util.List;
@@ -11,6 +13,9 @@ import java.util.List;
 public class SeanceServiceImpl implements SeanceService {
 
     private SeanceRepository seanceRepository;
+
+    @Autowired
+    private ReservationService reservationService;
 
     public SeanceServiceImpl(SeanceRepository seanceRepository){
         this.seanceRepository = seanceRepository;
@@ -26,8 +31,6 @@ public class SeanceServiceImpl implements SeanceService {
         return seanceRepository.getAllSeanceDaoList();
     }
 
-
-
     @Override
     public List<SeanceDAO> getAllByCinema(Long id) {
         return seanceRepository.getAllSeanceByCinemaDaoList(id);
@@ -39,8 +42,14 @@ public class SeanceServiceImpl implements SeanceService {
     }
 
     @Override
+    public void removeNotConfirmedReservation(Long id){
+        reservationService.removeNotConfirmed(id);
+    }
+
+    @Override
     public SeanceDAO setReservationAvailability(Long id, boolean availability) {    //czy mozna rezerwowac bilety na seans
-        return seanceRepository.setReservationAvailability(id, availability);       //po wylaczeniu usuwa wszystkie nieoplacone rezerwacje
+        SeanceDAO seanceDAO = seanceRepository.setReservationAvailability(id, availability);
+        return seanceDAO;
     }
 
     @Override

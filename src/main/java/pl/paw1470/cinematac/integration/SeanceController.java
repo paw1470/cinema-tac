@@ -34,4 +34,11 @@ public class SeanceController {
         return seanceService.getAllByCinema(id);
     }
 
+    @PostMapping("/reservation/{id}/block")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN') or hasRole('CASHIER')")
+    public SeanceDAO blockReservation(@PathVariable Long id) {
+        return seanceService.setReservationAvailability(id, false);
+    }
+
 }

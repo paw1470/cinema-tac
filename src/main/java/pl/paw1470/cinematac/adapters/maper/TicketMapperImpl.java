@@ -1,8 +1,10 @@
 package pl.paw1470.cinematac.adapters.maper;
 
-import pl.paw1470.cinematac.core.model.TicketDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Seance;
 import pl.paw1470.cinematac.adapters.db.entity.Ticket;
+import pl.paw1470.cinematac.adapters.maper.SeanceMapperImpl;
+import pl.paw1470.cinematac.core.model.SeanceDAO;
+import pl.paw1470.cinematac.core.model.TicketDAO;
 import pl.paw1470.cinematac.core.ports.mapper.SeanceMapper;
 import pl.paw1470.cinematac.core.ports.mapper.TicketMapper;
 
@@ -17,7 +19,7 @@ public class TicketMapperImpl implements TicketMapper {
         Ticket ticket = new Ticket(ticketDAO.getTicketType(),
                 seance,
                 ticketDAO.getPrice(),
-                ticketDAO.isActive()
+                true
         );
         return ticket;
     }
@@ -27,7 +29,7 @@ public class TicketMapperImpl implements TicketMapper {
         TicketDAO ticketDAO = new TicketDAO(ticket.getId(),
                 ticket.getTicketType(),
                 ticket.getPrice(),
-                ticket.isActive(),
+                true,
                 seanceMapper.entityToDao(ticket.getSeance())
         );
         return ticketDAO;
@@ -40,5 +42,15 @@ public class TicketMapperImpl implements TicketMapper {
             ticketDAOList.add(entityToDao(t));
         }
         return ticketDAOList;
+    }
+
+    public TicketDAO fastDao(SeanceDAO seance, String type, double price){
+        TicketDAO ticketDAO = new TicketDAO(1L,
+                type,
+                price,
+                true,
+                seance
+        );
+        return ticketDAO;
     }
 }

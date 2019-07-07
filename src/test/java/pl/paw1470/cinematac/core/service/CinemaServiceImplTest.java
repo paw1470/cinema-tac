@@ -1,14 +1,13 @@
 package pl.paw1470.cinematac.core.service;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.paw1470.cinematac.adapters.maper.lite.AddressMapperImplLite;
-import pl.paw1470.cinematac.adapters.maper.lite.CinemaMapperImplLite;
+import pl.paw1470.cinematac.adapters.maper.AddressMapperImpl;
+import pl.paw1470.cinematac.adapters.maper.CinemaMapperImpl;
 import pl.paw1470.cinematac.core.model.AddressDAO;
 import pl.paw1470.cinematac.core.model.CinemaDAO;
 
@@ -21,8 +20,8 @@ public class CinemaServiceImplTest {
     @Autowired
     private CinemaServiceImpl cinemaService;
 
-    private CinemaMapperImplLite cinemaMapper = new CinemaMapperImplLite();
-    private AddressMapperImplLite addressMapper = new AddressMapperImplLite();
+    private CinemaMapperImpl cinemaMapper = new CinemaMapperImpl();
+    private AddressMapperImpl addressMapper = new AddressMapperImpl();
 
     private AddressDAO defaultAddressDAO = addressMapper.fastDao("Lublin");
     private CinemaDAO defaultCinemaDAO = cinemaMapper.fastDao("Cinema", "info", defaultAddressDAO);

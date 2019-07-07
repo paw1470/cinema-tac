@@ -2,7 +2,6 @@ package pl.paw1470.cinematac.adapters.db.repository;
 
 import org.springframework.stereotype.Repository;
 import pl.paw1470.cinematac.adapters.db.entity.Movie;
-import pl.paw1470.cinematac.core.ports.mapper.MovieMapper;
 import pl.paw1470.cinematac.adapters.maper.MovieMapperImpl;
 import pl.paw1470.cinematac.core.ports.repository.MovieRepository;
 import pl.paw1470.cinematac.core.model.MovieDAO;
@@ -17,7 +16,7 @@ import java.util.List;
 @Transactional
 public class MovieRepositoryImpl implements MovieRepository {
 
-    private MovieMapper movieMapper = new MovieMapperImpl();
+    private MovieMapperImpl movieMapper = new MovieMapperImpl();
 
     @PersistenceContext
     private EntityManager entityManager;

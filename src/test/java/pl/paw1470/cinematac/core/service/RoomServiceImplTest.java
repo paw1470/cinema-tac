@@ -2,19 +2,17 @@ package pl.paw1470.cinematac.core.service;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.paw1470.cinematac.adapters.maper.lite.AddressMapperImplLite;
-import pl.paw1470.cinematac.adapters.maper.lite.CinemaMapperImplLite;
-import pl.paw1470.cinematac.adapters.maper.lite.RoomMapperImplLite;
+import pl.paw1470.cinematac.adapters.maper.AddressMapperImpl;
+import pl.paw1470.cinematac.adapters.maper.CinemaMapperImpl;
+import pl.paw1470.cinematac.adapters.maper.RoomMapperImpl;
 import pl.paw1470.cinematac.core.model.AddressDAO;
 import pl.paw1470.cinematac.core.model.CinemaDAO;
 import pl.paw1470.cinematac.core.model.RoomDAO;
-import pl.paw1470.cinematac.core.ports.service.RoomService;
 
 import static org.junit.Assert.*;
 
@@ -28,9 +26,9 @@ public class RoomServiceImplTest {
     @Autowired
     private RoomServiceImpl roomService;
 
-    private CinemaMapperImplLite cinemaMapper = new CinemaMapperImplLite();
-    private AddressMapperImplLite addressMapper = new AddressMapperImplLite();
-    private RoomMapperImplLite roomMapper = new RoomMapperImplLite();
+    private CinemaMapperImpl cinemaMapper = new CinemaMapperImpl();
+    private AddressMapperImpl addressMapper = new AddressMapperImpl();
+    private RoomMapperImpl roomMapper = new RoomMapperImpl();
 
 
     private CinemaDAO addedCinemaDAO;

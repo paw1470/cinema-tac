@@ -5,9 +5,8 @@ import org.springframework.stereotype.Repository;
 import pl.paw1470.cinematac.adapters.db.entity.Reservation;
 import pl.paw1470.cinematac.adapters.db.entity.Seance;
 import pl.paw1470.cinematac.adapters.db.entity.Ticket;
-import pl.paw1470.cinematac.adapters.maper.lite.ReservationMapperImplLite;
+import pl.paw1470.cinematac.adapters.maper.ReservationMapperImpl;
 import pl.paw1470.cinematac.core.model.ReservationDAO;
-import pl.paw1470.cinematac.core.ports.mapper.ReservationMapper;
 import pl.paw1470.cinematac.core.ports.repository.ReservationRepository;
 import pl.paw1470.cinematac.core.ports.repository.SeanceRepository;
 import pl.paw1470.cinematac.core.ports.repository.TicketRepository;
@@ -16,7 +15,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +22,7 @@ import java.util.Optional;
 @Transactional
 public class ReservationRepositoryImpl implements ReservationRepository {
 
-    private ReservationMapperImplLite reservationMapper = new ReservationMapperImplLite();
+    private ReservationMapperImpl reservationMapper = new ReservationMapperImpl();
 
     @PersistenceContext
     private EntityManager entityManager;

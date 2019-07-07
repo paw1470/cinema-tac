@@ -1,14 +1,20 @@
 package pl.paw1470.cinematac.adapters.maper;
 
-import pl.paw1470.cinematac.core.model.SeanceDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Movie;
 import pl.paw1470.cinematac.adapters.db.entity.Room;
 import pl.paw1470.cinematac.adapters.db.entity.Seance;
+import pl.paw1470.cinematac.adapters.maper.MovieMapperImpl;
+import pl.paw1470.cinematac.adapters.maper.RoomMapperImpl;
+import pl.paw1470.cinematac.core.model.MovieDAO;
+import pl.paw1470.cinematac.core.model.RoomDAO;
+import pl.paw1470.cinematac.core.model.SeanceDAO;
 import pl.paw1470.cinematac.core.ports.mapper.MovieMapper;
 import pl.paw1470.cinematac.core.ports.mapper.RoomMapper;
 import pl.paw1470.cinematac.core.ports.mapper.SeanceMapper;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SeanceMapperImpl implements SeanceMapper {
@@ -44,5 +50,15 @@ public class SeanceMapperImpl implements SeanceMapper {
             seanceDAOS.add(entityToDao(s));
         }
         return seanceDAOS;
+    }
+
+    public SeanceDAO fastDao(RoomDAO room, MovieDAO movie, LocalDateTime date){
+        SeanceDAO seanceDAO = new SeanceDAO(1L,
+                room,
+                date,
+                movie,
+                true,
+                true);
+        return seanceDAO;
     }
 }

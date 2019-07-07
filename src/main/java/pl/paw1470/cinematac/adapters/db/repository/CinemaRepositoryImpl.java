@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pl.paw1470.cinematac.adapters.db.entity.Address;
 import pl.paw1470.cinematac.adapters.db.entity.Cinema;
-import pl.paw1470.cinematac.core.ports.mapper.CinemaMapper;
 import pl.paw1470.cinematac.adapters.maper.CinemaMapperImpl;
 import pl.paw1470.cinematac.core.ports.repository.AddressRepository;
 import pl.paw1470.cinematac.core.ports.repository.CinemaRepository;
@@ -20,7 +19,7 @@ import java.util.List;
 @Transactional
 public class CinemaRepositoryImpl implements CinemaRepository {
 
-    private CinemaMapper cinemaMapper = new CinemaMapperImpl();
+    private CinemaMapperImpl cinemaMapper = new CinemaMapperImpl();
 
     @PersistenceContext
     private EntityManager entityManager;

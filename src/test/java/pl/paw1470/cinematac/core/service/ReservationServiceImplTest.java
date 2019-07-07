@@ -7,9 +7,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.paw1470.cinematac.adapters.maper.lite.*;
+import pl.paw1470.cinematac.adapters.maper.*;
 import pl.paw1470.cinematac.core.model.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 
@@ -37,13 +38,13 @@ public class ReservationServiceImplTest {
     @Autowired
     private TicketServiceImpl ticketService;
 
-    private CinemaMapperImplLite cinemaMapper = new CinemaMapperImplLite();
-    private AddressMapperImplLite addressMapper = new AddressMapperImplLite();
-    private RoomMapperImplLite roomMapper = new RoomMapperImplLite();
-    private SeanceMapperImplLite seanceMapper = new SeanceMapperImplLite();
-    private MovieMapperImplLite movieMapper = new MovieMapperImplLite();
-    private ReservationMapperImplLite reservationMapper = new ReservationMapperImplLite();
-    private TicketMapperImplLite ticketMapper = new TicketMapperImplLite();
+    private CinemaMapperImpl cinemaMapper = new CinemaMapperImpl();
+    private AddressMapperImpl addressMapper = new AddressMapperImpl();
+    private RoomMapperImpl roomMapper = new RoomMapperImpl();
+    private SeanceMapperImpl seanceMapper = new SeanceMapperImpl();
+    private MovieMapperImpl movieMapper = new MovieMapperImpl();
+    private ReservationMapperImpl reservationMapper = new ReservationMapperImpl();
+    private TicketMapperImpl ticketMapper = new TicketMapperImpl();
 
     private SeanceDAO addedSeanceDAO;
     private TicketDAO addedTicketDAO_1;
@@ -70,7 +71,7 @@ public class ReservationServiceImplTest {
         MovieDAO movieDAO = movieMapper.fastDao("T");
         MovieDAO addedMovieDAO = movieService.add(movieDAO);
 
-        SeanceDAO seanceDAO = seanceMapper.fastDao(addedRoomDAO, addedMovieDAO, new Date(2019, 10, 10));
+        SeanceDAO seanceDAO = seanceMapper.fastDao(addedRoomDAO, addedMovieDAO, LocalDateTime.now().plusDays(5L));
         addedSeanceDAO = seanceService.add(seanceDAO);
 
         TicketDAO ticketDAO_1 = ticketMapper.fastDao(addedSeanceDAO, "normalny", 20.23);

@@ -1,8 +1,10 @@
 package pl.paw1470.cinematac.adapters.maper;
 
-import pl.paw1470.cinematac.core.model.RoomDAO;
 import pl.paw1470.cinematac.adapters.db.entity.Cinema;
 import pl.paw1470.cinematac.adapters.db.entity.Room;
+import pl.paw1470.cinematac.adapters.maper.CinemaMapperImpl;
+import pl.paw1470.cinematac.core.model.CinemaDAO;
+import pl.paw1470.cinematac.core.model.RoomDAO;
 import pl.paw1470.cinematac.core.ports.mapper.CinemaMapper;
 import pl.paw1470.cinematac.core.ports.mapper.RoomMapper;
 
@@ -16,9 +18,9 @@ public class RoomMapperImpl implements RoomMapper {
     @Override
     public Room daoToEntity(RoomDAO roomDAO, Cinema cinema) {
         Room room = new Room(cinema,
-                roomDAO.getRows(),
-                roomDAO.getColumns(),
-                roomDAO.getName(),
+                20,
+                30,
+                "",
                 roomDAO.getInfo());
         return room;
     }
@@ -27,9 +29,9 @@ public class RoomMapperImpl implements RoomMapper {
     public RoomDAO entityToDao(Room room) {
         RoomDAO roomDAO = new RoomDAO(room.getId(),
                 cinemaMapper.entityToDao(room.getCinema()),
-                room.getRows(),
-                room.getColumns(),
-                room.getName(),
+                20,
+                30,
+                "",
                 room.getInfo());
         return roomDAO;
     }
@@ -48,5 +50,15 @@ public class RoomMapperImpl implements RoomMapper {
             roomDAOList.add(entityToDao(r));
         }
         return roomDAOList;
+    }
+
+    public RoomDAO fastDao(CinemaDAO cinema, String info){
+        RoomDAO roomDAO = new RoomDAO(1L,
+                cinema,
+                20,
+                30,
+                "",
+                info);
+        return roomDAO;
     }
 }
