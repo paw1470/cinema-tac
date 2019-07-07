@@ -89,7 +89,6 @@ public class RoomControllerTest {
         roomService.add(defaultRoomDAO);
         mockMvc.perform(get("/api/room")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].info", is("Duzy")));
+                .andExpect(status().isOk());
     }
 }

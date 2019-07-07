@@ -17,9 +17,15 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @PostMapping("/cancel/{id}")
+    @PostMapping("/{id}/cancel")
+    @ResponseStatus(HttpStatus.OK)
     public void cancel(@PathVariable Long id) {
         reservationService.removeById(id);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<ReservationDAO> get(@PathVariable Long id) {
+        return reservationService.getById(id);
     }
 
     @PostMapping("/reserve")
@@ -28,11 +34,20 @@ public class ReservationController {
         return reservationService.add(reservation);
     }
 
-    @PostMapping("/confirm/{id}")
+    @PostMapping("/{id}/buy")
     @PreAuthorize("hasRole('CASHIER')")
     public Optional<ReservationDAO> confirm(@PathVariable Long id) {
         reservationService.confirmReservation(id);
         return reservationService.getById(id);
+    }
+
+    @PostMapping("/buy")
+    @PreAuthorize("hasRole('CASHIER')")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Optional<ReservationDAO> createReservationwithConfirm(@RequestBody ReservationDAO reservation) {
+        Optional<ReservationDAO>  reservationDAO = reservationService.add(reservation);
+        reservationService.confirmReservation(reservationDAO.get().getId());
+        return reservationService.getById(reservationDAO.get().getId());
     }
 
 }
