@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.paw1470.cinematac.core.model.SeanceDAO;
+import pl.paw1470.cinematac.core.ports.service.ReservationService;
 import pl.paw1470.cinematac.core.ports.service.SeanceService;
 
 import java.util.List;
@@ -12,9 +13,11 @@ import java.util.List;
 @RequestMapping("/api/seance")
 public class SeanceController {
     private SeanceService seanceService;
+    private ReservationService reservationService;
 
-    public SeanceController(SeanceService seanceService) {
+    public SeanceController(SeanceService seanceService, ReservationService reservationService) {
         this.seanceService = seanceService;
+        this.reservationService = reservationService;
     }
 
     @PostMapping()
@@ -34,7 +37,12 @@ public class SeanceController {
         return seanceService.getAllByCinema(id);
     }
 
-    @PostMapping("/reservation/{id}/block")
+    @GetMapping("/free")
+    public boolean[][] getFreePlaces(@PathVariable Long id) {
+        return reservationService.getFreePlacesBySeance(id);
+    }
+
+        @PostMapping("/reservation/{id}/block")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN') or hasRole('CASHIER')")
     public SeanceDAO blockReservation(@PathVariable Long id) {

@@ -15,4 +15,5 @@ public interface SeanceService {
     SeanceDAO setReservationAvailability(Long id, boolean availability);
     void removeAll();
 
+
 }
